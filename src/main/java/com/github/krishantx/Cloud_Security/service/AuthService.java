@@ -20,7 +20,7 @@ public class AuthService {
         authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
         );
-        
+
         UserDetails ud = uds.loadUserByUsername(request.getUsername());
         return jwtUtil.generateToken(ud.getUsername());
     }
