@@ -1,10 +1,13 @@
 package com.github.krishantx.Cloud_Security.model;
 
 import jakarta.persistence.*;
-
-import java.util.Locale;
+import lombok.*;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class UserModel {
 
     @Id
@@ -17,30 +20,17 @@ public class UserModel {
     @Column(nullable = false)
     private String password;
 
-    public UserModel() {}
-    
-    public UserModel(String username, String password) {
-        this.username = username.toLowerCase();
-        this.password = password;
-    }
-    public long getId() { return id; }
-    public String getUsername() {
-        return username;
-    }
     public void setUsername(String username) {
-        this.username = username.toLowerCase();
+        this.username = username != null ? username.toLowerCase() : null;
     }
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
+
+    public UserModel(String username, String password) {
+        this.username = username != null ? username.toLowerCase() : null;
         this.password = password;
     }
 
     @Override
     public String toString() {
-        return (username + " " + password);
+        return username + " " + password;
     }
-
-    
 }
