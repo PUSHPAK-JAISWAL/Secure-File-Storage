@@ -20,11 +20,15 @@ import java.util.List;
 @Service
 public class FileService {
 
-    @Autowired
-    private FileRepo fileRepo;
+    private final FileRepo fileRepo;
+
+    private final UserRepo userRepo;
 
     @Autowired
-    private UserRepo userRepo;
+    private FileService (FileRepo fileRepo, UserRepo userRepo) {
+        this.fileRepo = fileRepo;
+        this.userRepo = userRepo;
+    }
 
     private final Path storageRoot = Paths.get("storage").toAbsolutePath().normalize();
 

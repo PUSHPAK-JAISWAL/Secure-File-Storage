@@ -11,11 +11,15 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepo userRepository;
+    private final UserRepo userRepository;
+
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private UserService(UserRepo userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public UserModel registerUser(RegisterRequest req) {
         UserModel user = new UserModel(req.getUsername(), passwordEncoder.encode(req.getPassword()));

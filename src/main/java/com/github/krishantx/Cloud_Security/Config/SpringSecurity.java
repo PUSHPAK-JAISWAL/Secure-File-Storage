@@ -19,11 +19,15 @@ import org.springframework.web.filter.CorsFilter;
 @Configuration
 public class SpringSecurity {
 
-    @Autowired
-    private JwtFilter jwtFilter;
+    private final JwtFilter jwtFilter;
+
+    private final CorsFilter corsFilter;
 
     @Autowired
-    private CorsFilter corsFilter;
+    private SpringSecurity(JwtFilter jwtFilter, CorsFilter corsFilter) {
+        this.jwtFilter = jwtFilter;
+        this.corsFilter = corsFilter;
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {

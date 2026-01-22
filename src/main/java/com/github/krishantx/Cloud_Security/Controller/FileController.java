@@ -14,8 +14,13 @@ import java.util.List;
 @RequestMapping("/files")
 public class FileController {
 
+
+    private final FileService fileService;
+
     @Autowired
-    private FileService fileService;
+    private FileController(FileService fileService) {
+        this.fileService = fileService;
+    }
 
     @PostMapping("/upload")
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file,

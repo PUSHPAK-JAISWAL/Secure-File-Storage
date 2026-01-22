@@ -13,8 +13,13 @@ import java.util.Collections;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
+
+    private final UserRepo repo;
+
     @Autowired
-    private UserRepo repo;
+    public CustomUserDetailsService(UserRepo repo) {
+        this.repo = repo;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

@@ -6,6 +6,7 @@ import com.github.krishantx.Cloud_Security.model.UserModel;
 import com.github.krishantx.Cloud_Security.service.AuthService;
 import com.github.krishantx.Cloud_Security.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -15,12 +16,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@AllArgsConstructor
 @RequestMapping("/auth")
 public class AuthController {
 
     private final AuthService authService;
     private final UserService userService;
+
+    @Autowired
+    private AuthController(AuthService authService, UserService userService) {
+        this.authService = authService;
+        this.userService = userService;
+    }
 
     @PostMapping("/register")
     public ResponseEntity<UserDto> register(@RequestBody RegisterRequest req) {
